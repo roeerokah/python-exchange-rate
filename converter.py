@@ -18,7 +18,6 @@ def converter(from_currency_list, to_currency_list, from_date, to_date):
     form_currency_string = '+'.join(from_currency_list)
 
     from_date = substract_time_if_needed(from_date)
-    print(from_date)
     for to in to_currency_list:
         if to != base:
             form_currency_string += "+" + to
@@ -29,12 +28,10 @@ def converter(from_currency_list, to_currency_list, from_date, to_date):
 
     res = requests.get(url, headers=headers)
     if res.status_code == 404:
-        print('the wanted Currencies was not found')
-        exit(0)
-    print(res.text)
+        raise Exception('the wanted Currencies was not found')
     if not res.text:
-        print('no values in this dates')
-        exit(0)
+        raise Exception('no values in this dates')
+
     tree = ET.fromstring(res.text)
 
     data = tree.find(MESSAGE + 'DataSet')
@@ -93,21 +90,18 @@ def build_xml_result(currencies, from_currency_list, to_currency_list):
             if from_cur is 'EUR':
                 for date in currencies[to_cur]:
                     val = str(currencies[to_cur][date])
-                    print('from:' + from_cur + ' to:' + to_cur + ' desired:' + val)
                     day_result = ET.SubElement(series_result, 'day')
                     day_result.set('time', date)
                     day_result.set('value', val)
             elif to_cur is 'EUR':
                 for date in currencies[from_cur]:
                     val = str(Decimal(1) / Decimal(currencies[from_cur][date]))
-                    print('from:' + from_cur + ' to:' + to_cur + ' desired:' + val)
                     day_result = ET.SubElement(series_result, 'day')
                     day_result.set('time', date)
                     day_result.set('value', val)
             else:
                 for date in currencies[from_cur]:
                     val = str(Decimal(1) / Decimal(currencies[from_cur][date]) * Decimal(currencies[to_cur][date]))
-                    print('from:'+from_cur+' to:'+to_cur+' desired:' + val)
                     day_result = ET.SubElement(series_result, 'day')
                     day_result.set('time', date)
                     day_result.set('value', val)
@@ -134,4 +128,4 @@ def indent(elem, level=0):
             elem.tail = i
 
 
-converter(['ILS'], ['JPY'], '2020-06-14', '2020-06-15')
+converter(['ILS', 'USD'], ['JPY', 'EUR'], '2020-06-18', '2020-06-21')

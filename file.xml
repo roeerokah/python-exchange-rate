@@ -1,7 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<data date="2020-06-21" id="6deaf5bd-5eb1-4aa7-9647-882435736c2c">
+<data date="2020-06-21" id="3d4a5bbc-3558-408d-920a-e10e75292858">
   <currency from="ILS" to="JPY">
-    <day time="2020-06-12" value="30.94235627344407869555232335" />
-    <day time="2020-06-15" value="30.70804106943173731828809596" />
+    <day time="2020-06-18" value="30.91906933601298600912112546" />
+    <day time="2020-06-19" value="31.01242879337131020196789229" />
+  </currency>
+  <currency from="ILS" to="EUR">
+    <day time="2020-06-18" value="0.2576589111334415500760093788" />
+    <day time="2020-06-19" value="0.2589331952356292076644225790" />
+  </currency>
+  <currency from="USD" to="JPY">
+    <day time="2020-06-18" value="106.9328105507039743361254678" />
+    <day time="2020-06-19" value="106.8421052631578947368421053" />
+  </currency>
+  <currency from="USD" to="EUR">
+    <day time="2020-06-18" value="0.8911067545891997861343788986" />
+    <day time="2020-06-19" value="0.8920606601248884924174843889" />
   </currency>
 </data>
